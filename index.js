@@ -1,7 +1,8 @@
+#!/usr/bin/env node
+
 const got = require('got');
 const crypto = require('crypto');
 const FormData  = require('form-data');
-const isChinese = require('is-chinese');
 
 const Table = require('cli-table3');
 
