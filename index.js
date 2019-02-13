@@ -1,8 +1,9 @@
 const got = require('got');
-const chalk = require('chalk');
 const crypto = require('crypto');
 const FormData  = require('form-data');
 const isChinese = require('is-chinese');
+
+const Table = require('cli-table3');
 
 
 const app = '20180126000118750';
@@ -43,34 +44,19 @@ for (let k in body) {
 
 (async () => {
     let res = await got.post(baseUrl, {body: form});
-
     res = JSON.parse(res.body);
-
-    let srcLen = words.length;
-
-    words.split('').forEach(w => {
-        if (isChinese(w)) {
-            srcLen ++;
-        }
-    });
-
-    let len    = srcLen;
-
     const dst = res.trans_result[0].dst;
-    let dstLen = dst.length;
-
-    dst.split('').forEach(w => {
-        if (isChinese(w)) {
-            dstLen ++;
-        }
-    });
-
-    len = len < dstLen ? dstLen : len;
-
     console.log();
-    console.log(chalk.red(words));
-    console.log(chalk.green('-'.repeat(len)));
-    console.log(chalk.blue(dst));
+
+    let table = new Table();
+    let t1 = {};
+    let t2 = {};
+
+    t1[st.from] = words;
+    t2[st.to]   = dst;
+    table.push(t1, t2);
+
+    console.log(table.toString());
     console.log();
 
 })();

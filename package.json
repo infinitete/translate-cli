@@ -9,9 +9,8 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "chalk": "^2.4.2",
+        "cli-table3": "^0.5.1",
         "form-data": "^2.3.3",
-        "got": "^9.6.0",
-        "is-chinese": "^1.2.6"
+        "got": "^9.6.0"
     }
 }
