@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
 const got = require('got');
+const Chalk = require('chalk');
 const crypto = require('crypto');
 const FormData  = require('form-data');
-
-const Table = require('cli-table3');
-
 
 const app = '20180126000118750';
 const sec = '7g0cI100ovn8masEITi4';
@@ -46,18 +44,13 @@ for (let k in body) {
 (async () => {
     let res = await got.post(baseUrl, {body: form});
     res = JSON.parse(res.body);
-    const dst = res.trans_result[0].dst;
+    let dst = res.trans_result[0].dst;
+    let winSize = require('window-size');
+
     console.log();
-
-    let table = new Table();
-    let t1 = {};
-    let t2 = {};
-
-    t1[st.from] = words;
-    t2[st.to]   = dst;
-    table.push(t1, t2);
-
-    console.log(table.toString());
+    console.log(Chalk.red.bold(words));
+    console.log('-'.repeat(winSize.width));
+    console.log(Chalk.greenBright.bold(dst));
     console.log();
 
 })();
